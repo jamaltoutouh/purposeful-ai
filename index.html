@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Purposeful AI Workshop @ FLICS 2026</title>
+  <meta name="description" content="Workshop website — Purposeful AI: Evolutionary Computation and Machine Learning in Social and Sustainable Systems (co-located with FLICS 2026).">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============ VARIABLES Y RESET ============ */
+    :root {
+      --primary: #0052cc;
+      --primary-light: #0066ff;
+      --primary-dark: #003d99;
+      --secondary: #004085;
+      --text: #1a1a1a;
+      --text-light: #4a4a4a;
+      --text-muted: #6a6a6a;
+      --bg: #ffffff;
+      --bg-light: #f5f8fc;
+      --border: #d0dbe6;
+      --radius: 6px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    /* ============ TIPOGRAFÍA ============ */
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.3rem; }
+    h4 { font-size: 1.1rem; }
+
+    p { color: var(--text-light); margin-bottom: 1rem; }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover { color: var(--primary-dark); }
+
+    code {
+      background: var(--bg-light);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    /* ============ LAYOUT ============ */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section { padding: 4rem 0; }
+    section.section-muted { background: var(--bg-light); }
+
+    /* ============ HEADER ============ */
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .brand-mark {
+      font-size: 1.6rem;
+      font-weight: 800;
+      min-width: 120px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-text h1 {
+      font-size: 1.65rem;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+
+    .brand-text .subtitle {
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 0.95rem;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    nav a {
+      color: white;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav a:hover { transform: translateY(-2px); }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after { width: 100%; }
+
+    /* ============ MAIN CONTENT ============ */
+    main { min-height: calc(100vh - 300px); }
+
+    /* ============ CARDS ============ */
+    .cards {
+      display: grid;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    /* Default: responsive auto-fit */
+    .cards.auto-fit {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+
+    /* Topics: force 2 per row on desktop */
+    .cards.two-col {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 768px) {
+      .cards.two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
+
+    .card-title { color: var(--primary); margin-bottom: 1rem; }
+
+    /* ============ LISTAS ============ */
+    .list { list-style: none; padding: 0; }
+
+    .list li {
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      position: relative;
+      color: var(--text-light);
+    }
+
+    .list li:before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    /* ============ GRID 2 COLUMNAS ============ */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* ============ OVERVIEW MEDIA ============ */
+    .overview-media {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
+
+    .overview-logo {
+      width: 100%;
+      max-width: 180px;
+      height: auto;
+      border: 0px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg-light);
+    }
+
+    @media (max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .overview-logo { width: 40%; max-width: 220px; margin-top: 1rem; }
+    }
+
+    /* ============ TIMELINE ============ */
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .timeline-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover { border-left-color: var(--secondary); }
+
+    .timeline-tag {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-content h3 { margin-top: 0.5rem; color: var(--text); }
+
+    /* ============ TEAM ============ */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .team-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: all 0.3s ease;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .team-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
+
+    .team-card .avatar {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      background: var(--bg-light);
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      display: block;
+      border: 3px solid var(--border);
+    }
+
+    .team-body h3 { margin: 0 0 0.5rem 0; color: var(--text); }
+
+    .role {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .affiliation {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 0.75rem;
+    }
+
+    .links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      font-size: 0.85rem;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .links a:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* ============ BOTONES ============ */
+    .button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border-radius: var(--radius);
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid var(--primary);
+    }
+
+    .button:hover {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .button-ghost {
+      background: transparent;
+      color: var(--primary);
+    }
+
+    .button-ghost:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* ============ CONTACT CARD ============ */
+    .contact-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .contact-actions {
+      display: flex;
+      gap: 1rem;
+      flex-direction: column;
+    }
+
+    @media (max-width: 600px) {
+      .contact-card { grid-template-columns: 1fr; }
+      .contact-actions { flex-direction: row; }
+    }
+
+    /* ============ NOTAS Y MUTED ============ */
+    .note {
+      background: var(--bg-light);
+      padding: 1rem;
+      border-left: 3px solid var(--primary);
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      margin: 1rem 0;
+      color: var(--text-light);
+    }
+
+    .muted { color: var(--text-muted); font-size: 0.9rem; }
+
+    /* ============ FOOTER ============ */
+    footer {
+      background: var(--secondary);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a { color: white; text-decoration: underline; }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 768px) {
+      h1 { font-size: 1.8rem; }
+      h2 { font-size: 1.5rem; }
+      .brand { flex-direction: column; align-items: flex-start; }
+      .brand-text h1 { font-size: 1.25rem; }
+      nav { gap: 1rem; font-size: 0.85rem; }
+      section { padding: 2rem 0; }
+      .timeline { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <div class="brand-mark">EC×ML</div>
+        <div class="brand-text">
+          <h1>Purposeful AI: Evolutionary Computation and Machine Learning in Social and Sustainable Systems</h1>
+          <p class="subtitle">Workshop co-located with FLICS 2026 · Valencia (Spain) · June 9–12, 2026</p>
+        </div>
+      </div>
+
+      <nav aria-label="Primary navigation">
+        <a href="#overview">Overview</a>
+        <a href="#topics">Topics</a>
+        <a href="#submission">Submissions</a>
+        <a href="#dates">Important dates</a>
+        <a href="#organizers">Organizers</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- OVERVIEW -->
+    <section id="overview">
+      <div class="container">
+          <div>
+            <h2>Overview</h2>
+            <p>
+              AI systems increasingly operate <strong>in society</strong>: they interact with people, institutions, and environments over time,
+              under changing contexts and real constraints. This workshop focuses on <strong>purposeful AI</strong>, where objectives go beyond
+              predictive accuracy and include <strong>human-centered</strong> requirements (e.g., safety, fairness, accessibility, trust,
+              accountability) and <strong>sustainability</strong> goals (e.g., energy efficiency, emissions reduction, climate resilience,
+              resource-aware learning).
+            </p>
+            <p>
+              The workshop brings together researchers and practitioners working on <strong>Evolutionary Computation (EC)</strong> and
+              <strong>Machine Learning (ML)</strong>—individually or in combination—to design, optimize, and evaluate intelligent systems that must
+              navigate <strong>multi-objective trade-offs</strong>, non-stationarity, heterogeneity, and deployment constraints.
+            </p>
+
+            <div class="note">
+              <strong>Co-located event:</strong> This workshop will take place during <strong>FLICS 2026</strong>.
+              Please refer to the main conference website for venue details and registration information.
+            </div>
+
+            <p>
+              <a class="button" href="https://flics-conference.org/" target="_blank" rel="noopener">Visit FLICS 2026</a>
+              <a class="button button-ghost" href="#submission">How to submit</a>
+            </p>
+          </div>
+
+          
+      </div>
+    </section>
+
+    <!-- TOPICS -->
+    <section id="topics" class="section-muted">
+      <div class="container">
+        <h2>Topics of interest</h2>
+        <p>
+          The workshop is intentionally broad. We welcome methodological and application-driven contributions, including (but not limited to):
+        </p>
+
+        <!-- Force 2 cards per row on desktop -->
+        <div class="cards two-col">
+          <article class="card">
+            <h3 class="card-title">EC + ML methods</h3>
+            <ul class="list">
+              <li>Multi-objective optimization and Pareto-front analysis for learning systems</li>
+              <li>Constrained and safe optimization (hard constraints, feasibility-first, penalty methods)</li>
+              <li>Evolutionary hyperparameter optimization, AutoML, and neural architecture search</li>
+              <li>Population-based training, coevolutionary learning, and memetic EC–ML hybrids</li>
+              <li>Evolutionary reinforcement learning and policy search</li>
+              <li>Surrogate-assisted optimization and simulation-based optimization</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Human-centered and trustworthy AI</h3>
+            <ul class="list">
+              <li>Fairness-aware learning, bias mitigation, and equity metrics</li>
+              <li>Accessibility-by-design and inclusive intelligent services</li>
+              <li>Interpretability, transparency, and human-understandable policies/models</li>
+              <li>Robustness, calibration, reliability, and uncertainty estimation</li>
+              <li>Human-in-the-loop optimization, preference learning, interactive EC/ML</li>
+              <li>Auditability and evaluation protocols for real deployments</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Sustainability and resource-aware AI</h3>
+            <ul class="list">
+              <li>Energy- and carbon-aware training, inference, and deployment</li>
+              <li>Green AI metrics and optimization under compute/energy constraints</li>
+              <li>Sustainability objectives (emissions, resilience, resource allocation)</li>
+              <li>Climate-risk modeling and decision support under uncertainty</li>
+              <li>Trade-offs: performance vs. energy vs. latency vs. robustness</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Applications and real-world settings</h3>
+            <ul class="list">
+              <li>Smart cities and urban computing (mobility, safety, accessibility, energy, sensing)</li>
+              <li>Healthcare and public health decision support</li>
+              <li>Industry 4.0, robotics, predictive maintenance</li>
+              <li>Education and digital public services</li>
+              <li>Environmental monitoring and sustainability analytics</li>
+              <li>Distributed/federated and edge settings (welcome but not required)</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBMISSIONS -->
+    <section id="submission">
+      <div class="container">
+        <h2>Submissions</h2>
+
+        <div class="cards auto-fit">
+          <article class="card">
+            <h3 class="card-title">What we invite</h3>
+            <ul class="list">
+              <li><strong>Regular papers</strong> (research contributions)</li>
+              <li><strong>Short papers / position papers</strong> (work-in-progress, visions)</li>
+              <li><strong>Demo / benchmark papers</strong> (tools, datasets, evaluation frameworks)</li>
+              <li><strong>Applied case studies</strong> (industry/public-sector deployments)</li>
+            </ul>
+            <p class="muted">
+              Review criteria include technical quality, clarity, relevance to the workshop scope, and sound evaluation.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">How to submit</h3>
+            <p>
+              Please follow the <strong>FLICS 2026</strong> submission instructions and templates.
+              The workshop shares the same key dates listed below.
+            </p>
+            <p>
+              <a class="button" href="https://flics-conference.org/" target="_blank" rel="noopener">Submission info (FLICS 2026)</a>
+              <a class="button button-ghost" href="#contact">Ask the organizers</a>
+            </p>
+            <p class="muted">
+              Note: if the conference provides a dedicated workshop track in the submission system, we will link it here when available.
+            </p>
+          </article>
+        </div>
+
+        <div class="note">
+          <strong>Proceedings:</strong> Workshop papers will follow the publication policy of the host conference.
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPORTANT DATES -->
+    <section id="dates" class="section-muted">
+      <div class="container">
+        <h2>Important dates</h2>
+        <p>Dates below follow the FLICS 2026 main schedule provided by the organizers.</p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <span class="timeline-tag">February 20th, 2026</span>
+              <h3>Paper submission deadline</h3>
+              <p class="muted">Submit your research papers and abstracts.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <span class="timeline-tag">April 15th, 2026</span>
+              <h3>Notification of acceptance</h3>
+              <p class="muted">Authors will be notified of paper acceptance status.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <span class="timeline-tag">May 5th, 2026</span>
+              <h3>Camera-ready submission</h3>
+              <p class="muted">Final version of accepted papers due.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>Workshop dates:</strong> June 9–12, 2026 (co-located with FLICS 2026). The exact workshop day/time will be announced in the conference program.
+        </div>
+      </div>
+    </section>
+
+    <!-- ORGANIZERS -->
+    <section id="organizers">
+      <div class="container">
+        <h2>Organizers</h2>
+        <p>For questions about scope, submissions, or participation, please contact any organizer.</p>
+
+        <div class="team-grid">
+          <article class="team-card">
+            <img class="avatar" src="assets/team/jamal_toutouh.png" alt="Jamal Toutouh (optional photo)">
+            <div class="team-body">
+              <h3>Jamal Toutouh</h3>
+              <p class="role">Organizer</p>
+              <p class="affiliation">University of Málaga (Spain)</p>
+              <div class="links">
+                <a href="mailto:jamal@uma.es">Email</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="team-card">
+            <img class="avatar" src="assets/team/gabriel_luque.jpeg" alt="Gabriel Luque (optional photo)">
+            <div class="team-body">
+              <h3>Gabriel Luque</h3>
+              <p class="role">Organizer</p>
+              <p class="affiliation">University of Málaga (Spain)</p>
+              <div class="links">
+                <a href="mailto:gluque@uma.es">Email</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="team-card">
+            <img class="avatar" src="assets/team/pedro_pedroza.jpeg" alt="Diego Daniel Pedroza-Pérez (optional photo)">
+            <div class="team-body">
+              <h3>Diego Daniel Pedroza-Pérez</h3>
+              <p class="role">Organizer</p>
+              <p class="affiliation">University of Málaga (Spain)</p>
+              <div class="links">
+                <a href="mailto:pedroza@uma.es">Email</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section-muted">
+      <div class="container">
+        <h2>Contact</h2>
+
+        <div class="contact-card">
+          <div>
+            <p><strong>Primary contact:</strong> Jamal Toutouh — University of Málaga (Spain)</p>
+            <p class="muted">
+              Use email for questions about scope, submissions, attendance, or volunteering for PC/panels/demos.
+            </p>
+          </div>
+
+          <div class="contact-actions">
+            <a class="button" href="mailto:jamal@uma.es">Send email</a>
+            <a class="button button-ghost" href="https://flics-conference.org/" target="_blank" rel="noopener">FLICS 2026</a>
+          </div>
+        </div>
+
+        <p class="muted">
+          Suggested email subject: <code>[Purposeful AI Workshop] Question</code>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>
+        © <span id="year"></span> — Purposeful AI Workshop · Co-located with
+        <a href="https://flics-conference.org/" target="_blank" rel="noopener">FLICS 2026</a>.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

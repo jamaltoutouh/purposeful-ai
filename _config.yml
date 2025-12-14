@@ -1,0 +1,13 @@
+title: Mi Sitio
+description: Sitio estático publicado con GitHub Pages
+lang: es
+
+# GitHub Pages configuración
+exclude:
+  - .gitignore
+  - README.md
+
+# Opcional: descomentar si usas dominio personalizado
+# url: "https://TU_DOMINIO.com"
+# baseurl: "" # para user site
+# baseurl: "/NOMBRE_DEL_REPO" # para project site
