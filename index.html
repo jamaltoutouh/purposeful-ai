@@ -624,6 +624,128 @@
       color: #6366f1;
     }
 
+    /* Organizing Committee */
+    .organizer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .organizer-card {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      position: relative;
+    }
+
+    .organizer-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      background: linear-gradient(135deg, #ffffff, var(--gray-50));
+    }
+
+    .organizer-card.primary-contact {
+      border: 2px solid var(--accent);
+      background: linear-gradient(135deg, rgba(0,160,233,0.05), rgba(0,212,255,0.02));
+    }
+
+    .organizer-card.primary-contact::before {
+      content: 'Primary Contact';
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .organizer-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.25rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0,160,233,0.25);
+      transition: transform 0.3s ease;
+    }
+
+    .organizer-photo {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.25rem;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--accent);
+      box-shadow: 0 4px 12px rgba(0,160,233,0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: block;
+      background: var(--gray-100);
+    }
+
+    .organizer-card:hover .organizer-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .organizer-card:hover .organizer-photo {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,160,233,0.35);
+    }
+
+    .organizer-name {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .organizer-affiliation {
+      color: var(--gray-600);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .organizer-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      background: rgba(0,160,233,0.08);
+      transition: all 0.3s ease;
+    }
+
+    .organizer-email:hover {
+      background: rgba(0,160,233,0.15);
+      transform: translateY(-2px);
+      color: var(--accent-dark);
+    }
+
+    .organizer-email i {
+      font-size: 0.9rem;
+    }
+
     /* Responsive Design */
     @media (max-width: 1200px) {
       .topic-grid {
@@ -635,6 +757,10 @@
       }
       
       .submission-types {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+
+      .organizer-grid {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       }
     }
@@ -755,6 +881,31 @@
       
       .submission-card {
         padding: 1.5rem;
+      }
+
+      .organizer-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      .organizer-card {
+        padding: 1.75rem;
+      }
+
+      .organizer-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.75rem;
+      }
+
+      .organizer-photo {
+        width: 100px;
+        height: 100px;
+        border-width: 3px;
+      }
+
+      .organizer-name {
+        font-size: 1.2rem;
       }
       
       .highlight-box {
@@ -1260,6 +1411,62 @@
         </div>
       </section>
 
+      <!-- Organizing Committee -->
+      <section class="section-card fade-in" id="organizers">
+        <div class="section-header">
+          <div class="section-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h2 class="section-title">Organizing Committee</h2>
+        </div>
+        <p class="section-subtitle">
+          For questions about scope, submissions, or participation, please contact any organizer.
+        </p>
+
+        <div class="organizer-grid">
+          <!-- Primary Contact -->
+          <div class="organizer-card primary-contact">
+            <img src="images_loads/jamal.png" alt="Jamal Toutouh" class="organizer-photo">
+            <h3 class="organizer-name">Jamal Toutouh</h3>
+            <p class="organizer-affiliation">University of Málaga (Spain)</p>
+            <a href="mailto:jamal@uma.es" class="organizer-email">
+              <i class="fas fa-envelope"></i>
+              jamal@uma.es
+            </a>
+          </div>
+
+          <!-- Organizer 2 -->
+          <div class="organizer-card">
+            <img src="images_loads/gabriel.jpeg" alt="Gabriel Luque" class="organizer-photo">
+            <h3 class="organizer-name">Gabriel Luque</h3>
+            <p class="organizer-affiliation">University of Málaga (Spain)</p>
+            <a href="mailto:gluque@uma.es" class="organizer-email">
+              <i class="fas fa-envelope"></i>
+              gluque@uma.es
+            </a>
+          </div>
+
+          <!-- Organizer 3 -->
+          <div class="organizer-card">
+            <img src="images_loads/Diego.jpeg" alt="Diego D. Pedroza" class="organizer-photo">
+            <h3 class="organizer-name">Diego D. Pedroza</h3>
+            <p class="organizer-affiliation">University of Málaga (Spain)</p>
+            <a href="mailto:pedroza@uma.es" class="organizer-email">
+              <i class="fas fa-envelope"></i>
+              pedroza@uma.es
+            </a>
+          </div>
+        </div>
+
+        <div class="highlight-box mt-4">
+          <p class="mb-0">
+            <strong>Primary Contact:</strong> Jamal Toutouh — University of Málaga (Spain)<br>
+            <small>Use email for questions about scope, submissions, attendance, or volunteering for PC/panels/demos.</small><br>
+            <small><strong>Suggested email subject:</strong> [LODAS 2026 Workshop] Question</small>
+          </p>
+        </div>
+      </section>
+
       <!-- Call to Action -->
       <section class="section-card fade-in" style="background: linear-gradient(135deg, rgba(0,160,233,0.1), rgba(0,212,255,0.05)); border: 2px solid var(--accent);">
         <div class="text-center">
@@ -1276,6 +1483,9 @@
             </a>
             <a href="#topics" class="btn-hero btn-hero-outline" style="color: var(--primary); border-color: var(--primary);">
               <i class="fas fa-lightbulb"></i> Explore Topics
+            </a>
+            <a href="#organizers" class="btn-hero btn-hero-outline" style="color: var(--primary); border-color: var(--primary);">
+              <i class="fas fa-users"></i> Contact Organizers
             </a>
           </div>
         </div>
